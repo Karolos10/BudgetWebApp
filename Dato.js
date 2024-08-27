@@ -1,7 +1,7 @@
 class Dato{
     constructor(descripcion, valor) { 
         this.descripcion = descripcion;
-        this.valor
+        this.valor = valor;
     }
     getDescripcion(){
         return this.descripcion;
