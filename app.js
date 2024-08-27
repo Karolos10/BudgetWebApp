@@ -46,3 +46,54 @@ const formatoMoneda = (valor) => {
 const formatoPorcentaje = (valor) => { 
     return valor.toLocaleString('en-US', { style: 'percent', minimunFractionDigits: 2 });
 }
+
+const cargarIngresos = () => { 
+    let ingresosHTML = '';
+    for (let ingreso of ingresos) {
+        ingresosHTML += crearIngresoHTML(ingreso);
+    }
+    document.getElementById('lista-ingresos').innerHTML = ingresosHTML;
+}
+
+const crearIngresoHTML = (ingreso) => { 
+    let ingresoHTML = `
+        <div class="elemento limpiarEstilos">
+            <div class="elemento_descripcion">${ingreso.descripcion}</div>
+            <div class="derecha limpiarEstilos">
+                <div class="elemento_valor">+${formatoMoneda(ingreso.valor)}</div>
+                <div class="elemento_eliminar">
+                    <button class="elemento_eliminar--btn">
+                        <ion-icon name="close-circle-outline"></ion-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    return ingresoHTML;
+}
+
+const cargarEgresos = () => { 
+    let egresosHTML = '';
+    for (let egreso of egresos) {
+        egresosHTML += crearEgresoHTML(egreso);
+    }
+    document.getElementById('lista-egresos').innerHTML = egresosHTML;
+}
+
+const crearEgresoHTML = (egreso) => { 
+    let egresoHTML = `
+        <div class="elemento limpiarEstilos">
+            <div class="elemento_descripcion">${egreso.descripcion}</div>
+            <div class="derecha limpiarEstilos">
+                <div class="elemento_valor">-${formatoMoneda(egreso.valor)}</div>
+                <div class="elemento_porcentaje">${formatoPorcentaje(egreso.valor / totalEgresos())}</div>
+                <div class="elemento_eliminar">
+                    <button class="elemento_eliminar--btn">
+                        <ion-icon name="close-circle-outline"></ion-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    return egresoHTML;
+}
